@@ -62,9 +62,13 @@ class XhupBotConfig(object):
     turing_api = "http://openapi.tuling123.com/openapi/api/v2"
     turing_key = os.getenv("TURING_KEY")
 
-    # 小鹤拆字短链api
-    short_url_api = 'http://xhup.club/index.php/Home/Service/getShortUrl'
+    # 短链api（范爷提供）
+    short_url_api = os.getenv("SHORT_URL_API")
     short_url_token = os.getenv("SHORT_URL_TOKEN")
+
+    # xhup-club-api
+    xhup_club_api = os.getenv("XHUP_CLUB_API")
+    xhup_club_token = os.getenv("XHUP_CLUB_TOKEN")
 
     # 字符相关
     symbols_us = string.printable  # 也包含了数字和特殊标点
