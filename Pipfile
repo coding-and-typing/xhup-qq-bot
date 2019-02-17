@@ -5,7 +5,8 @@ name = "pypi"
 
 [packages]
 python-dotenv = "*"
-nonebot = "*"
+nonebot = {extras = ["scheduler"], version = "*"}
+requests = "*"
 
 [dev-packages]
 
