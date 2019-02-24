@@ -22,7 +22,7 @@ sudo docker run -ti --rm --name cqhttp-coolq \
              -e COOLQ_ACCOUNT=$COOLQ_ACCOUNT  \
              -e VNC_PASSWD=$VNC_PASSWD \
              -p 9000:9000 \
-             -e CQHTTP_FORCE_ENV=$CQHTTP_FORCE_ENV \
+             -e FORCE_ENV=$FORCE_ENV \
              -e CQHTTP_USE_HTTP=no \
              -e CQHTTP_USE_WS_REVERSE=yes  \
              -e CQHTTP_ACCESS_TOKEN=$CQHTTP_ACCESS_TOKEN  \
