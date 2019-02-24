@@ -5,8 +5,9 @@ name = "pypi"
 
 [packages]
 python-dotenv = "*"
-nonebot = {extras = ["scheduler"], version = "*"}
 requests = "*"
+aiocqhttp = "*"
+apscheduler = "*"
 
 [dev-packages]
 

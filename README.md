@@ -4,7 +4,7 @@
 使用 nonebot 与 CQ-HTTP-API 与酷Q 通信
 
 
-## docker-coolq
+### docker-coolq
 
 先 cd 到 scripts 文件夹内，
 
@@ -13,3 +13,4 @@
 1. 远程 UI：`http://$SERVER_IP:9000/`
 
 配置见 `.env`
+
