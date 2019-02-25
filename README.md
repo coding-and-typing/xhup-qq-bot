@@ -1,7 +1,7 @@
 ## 拆小鹤
 
 小鹤双拼QQ群拆字机器人，xhup-club-api 的前端之一。
-使用 nonebot 与 CQ-HTTP-API 与酷Q 通信
+使用 aiocqhttp 与酷Q通信
 
 
 ### docker-coolq
