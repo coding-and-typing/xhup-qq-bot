@@ -1,7 +1,7 @@
 
 
 """
-待实现
+小鹤双拼相关命令
 """
 from aiocqhttp import CQHttp
 from aiocqhttp.message import Message
@@ -19,7 +19,7 @@ async def query_char(bot: CQHttp, context: Dict[str, Any], groupdict):
     if char not in BotConfig.SYMBOLS_ALL:  # 剔除标点
         info = await xhup_club.query_char(char)  # 查询拆字表
         if info:
-            await bot.send(context, Message(info), at_sender=True)
+            await bot.send(context, Message(info))
 
 
 # @on_group_command(r"[?？](?P<char>\w+)")

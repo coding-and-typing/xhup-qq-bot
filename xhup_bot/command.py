@@ -7,6 +7,8 @@ from aiocqhttp import CQHttp
 from aiocqhttp.message import Message, MessageSegment
 from typing import Callable, Pattern, Dict, Any, Iterable
 
+from config import BotConfig
+
 """
 QQ消息解析模块
 """
@@ -84,17 +86,23 @@ async def handle_group_message(bot: CQHttp, context: Dict[str, Any]):
     if not context['message']:
         context['message'].append(MessageSegment.text(''))
 
+    # 处理 at_me
     raw_to_me = context.get('to_me', False)
     _check_at_me(bot, context)
     _check_calling_me_nickname(bot, context)
     context['to_me'] = raw_to_me or context['to_me']
 
+    group_id = context['group_id']
+    user_role = context['sender']['role']
     for pattern, data in _group_registry.items():
         matcher = pattern.fullmatch(context['message'].extract_plain_text())
         if matcher:
             if data['at_me'] and not context['to_me']:  # 该命令需要 at_me，但是却没有
                 return
-            await data['handler'](bot, context)
+
+            # TODO 处理命令权限问题（鹤主群只允许管理员查询）
+
+            await data['handler'](bot, context, matcher.groupdict())
 
 
 async def handle_private_message(bot: CQHttp, context: Dict[str, Any]):
@@ -152,13 +160,13 @@ def _check_calling_me_nickname(bot: CQHttp, context: Dict[str, Any]) -> None:
 
     first_text = first_msg_seg.data['text']
 
-    if bot.config.NICKNAME:
+    if BotConfig.NICKNAME:
         # check if the user is calling me with my nickname
-        if isinstance(bot.config.NICKNAME, str) or \
-                not isinstance(bot.config.NICKNAME, Iterable):
-            nicknames = (bot.config.NICKNAME,)
+        if isinstance(BotConfig.NICKNAME, str) or \
+                not isinstance(BotConfig.NICKNAME, Iterable):
+            nicknames = (BotConfig.NICKNAME,)
         else:
-            nicknames = filter(lambda n: n, bot.config.NICKNAME)
+            nicknames = filter(lambda n: n, BotConfig.NICKNAME)
         nickname_regex = '|'.join(nicknames)
         m = re.search(rf'^({nickname_regex})([\s,，]*|$)',
                       first_text, re.IGNORECASE)

@@ -32,6 +32,13 @@ async def handle(context: Dict[str, Any]):
     await handle_private_message(bot, context)
 
 
+# app = bot.server_app
+
+# @app.route('/groups_permission')
+# async def groups_permission():
+#     """提供群权限上报 api"""
+#     pass
+
 if __name__ == '__main__':
     xhup_bot.load_builtin_plugins()  # 加载插件
     bot.run(host=BotConfig.HOST, port=BotConfig.PORT)

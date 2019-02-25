@@ -38,8 +38,10 @@ class BotConfig(object):
         'apscheduler.timezone': 'Asia/Shanghai'
     }
 
+    NICKNAME = "拆小鹤"
+
     # 图灵聊天机器人 api
-    turing_api = "http://openapi.tuling123.com/openapi/api/v2"
+    TURING_API = "http://openapi.tuling123.com/openapi/api/v2"
     TURING_KEY = os.getenv("TURING_KEY")
 
     # 短链api（范爷提供）
@@ -49,6 +51,8 @@ class BotConfig(object):
     # xhup-club-api
     XHUP_CLUB_API = os.getenv("XHUP_CLUB_API")
     XHUP_CLUB_TOKEN = os.getenv("XHUP_CLUB_TOKEN")
+
+    XHUP_CHARS_QUERY_API = f"{XHUP_CLUB_API}/xhup/chars"
 
     # 字符相关
     SYMBOLS_US = frozenset(chain(string.printable, "  "))  # 也包含了数字和特殊标点

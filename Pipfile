@@ -8,6 +8,8 @@ python-dotenv = "*"
 requests = "*"
 aiocqhttp = "*"
 apscheduler = "*"
+aiodns = "*"
+cchardet = "*"
 
 [dev-packages]
 

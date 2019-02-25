@@ -14,3 +14,8 @@
 
 配置见 `.env`
 
+
+### 相关
+
+本项目使用了 [nonebot](https://github.com/richardchien/nonebot/) 的部分代码，在此致谢。
+
