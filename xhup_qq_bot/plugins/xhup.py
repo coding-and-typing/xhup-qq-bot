@@ -8,7 +8,7 @@ from aiocqhttp.message import Message
 from typing import Dict, Any
 
 from config import BotConfig
-from xhup_bot import on_group_command, on_private_command, xhup_club
+from xhup_qq_bot import on_group_command, on_private_command, xhup_club
 
 
 @on_group_command(r"[?？](?P<char>\w)", at_me=False)

@@ -4,8 +4,8 @@ from aiocqhttp.message import Message
 from typing import Dict, Any
 
 from config import BotConfig
-from xhup_bot import on_group_command, on_private_command, xhup_club
-from xhup_bot.common import talk
+from xhup_qq_bot import on_group_command, on_private_command, xhup_club
+from xhup_qq_bot.common import talk
 
 
 @on_group_command(".*", at_me=True)
