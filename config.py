@@ -27,7 +27,7 @@ class BotConfig(object):
     """
 
     # 1. 来自 .env
-    DEBUG = os.getenv("DEBUG")
+    DEBUG = True if os.getenv("DEBUG") == 'True' else False
     LOG_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
     ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
