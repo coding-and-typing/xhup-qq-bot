@@ -7,9 +7,9 @@
 
 ### docker-coolq
 
-先 cd 到 scripts 文件夹内，
+在项目根目录下运行：
 
-1. 启动：`bash run_coolq.sh`
+1. 启动：`bash scripts/run_coolq.sh`
 1. 更新并重启：`bash upgrade_and_restart_coolq.sh`
 1. 远程 UI：`http://$SERVER_IP:9000/`
 
