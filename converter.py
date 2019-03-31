@@ -51,7 +51,7 @@ def cq_2_xhup(info):
                 "type": info.get("message_type"),  # 'private' or 'group'
                 "user": {
                     "id": info.get('user_id'),  # 用户 id，QQ 号等
-                    "role": info.get('sender'),  # 群组 owner/admin/other
+                    "role": info.get('sender')['role'],  # 群组 owner/admin/other
                 },
                 "group": {
                     "id": info['group_id'],  # 群 id
