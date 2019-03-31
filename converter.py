@@ -58,7 +58,7 @@ def cq_2_xhup(info):
                     "at_me": is_at_me(info['message'], info['self_id']),  # 是否是 at 我
                 },
 
-                "text": info['message'].extract_plain_text(),  # 消息的 text 部分。（去除掉了表情、at 和多媒体数据）
+                "text": info['message'].extract_plain_text().strip(),  # 消息的 text 部分。（去除掉了表情、at 和多媒体数据）
                 "images": extract_images(info['message']),  # 图片路径
             },
         }
