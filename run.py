@@ -55,8 +55,10 @@ async def handle_xhup_club_event():
         if xhup_club_ws:
             try:
                 reply = json.loads(await xhup_club_ws.recv())
-                cq_reply = xhup_2_cq(reply)
-                await bot.send_msg(**cq_reply)
+                if reply:
+                    cq_reply = xhup_2_cq(reply)
+                    logger.debug(f"机器人发出消息：{cq_reply}")
+                    await bot.send_msg(**cq_reply)
             except websockets.ConnectionClosed as e:
                 logger.info(e)
                 logger.info("连接断开，三秒后自动重连")
@@ -74,6 +76,8 @@ async def handle_msg(context):
     """
     在收到 CoolQ 消息时，将消息处理后，转发给 xhup
     """
+    logger.debug(f"收到消息：{context}")
+
     global xhup_club_ws
     if xhup_club_ws:
         try:
