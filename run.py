@@ -38,11 +38,11 @@ async def get_xhup_club_ws():
                                      })
         try:
             xhup_club_ws = await connect
-            logger.debug("连接成功")
+            logger.debug("后端连接成功")
             return xhup_club_ws
         except OSError as e:
             logger.info(e)
-            logger.info("连接失败，三秒后重连")
+            logger.info("后端连接失败，三秒后重连")
             await asyncio.sleep(3)
 
 
@@ -57,17 +57,17 @@ async def handle_xhup_club_event():
                 reply = json.loads(await xhup_club_ws.recv())
                 if reply:
                     cq_reply = xhup_2_cq(reply)
-                    logger.debug(f"机器人发出消息：{cq_reply}")
+                    logger.debug(f"机器人回复消息：{cq_reply}")
                     await bot.send_msg(**cq_reply)
             except websockets.ConnectionClosed as e:
                 logger.info(e)
-                logger.info("连接断开，三秒后自动重连")
+                logger.info("后端连接断开，三秒后自动重连")
                 await asyncio.sleep(3)
                 xhup_club_ws = await get_xhup_club_ws()
             except Exception as e:
                 logger.warning(e)
         else:
-            logger.info("后端 websocket 尚未连接，现在尝试连接。")
+            logger.info("后端尚未连接，现在尝试连接。")
             xhup_club_ws = await get_xhup_club_ws()
 
 
@@ -85,11 +85,11 @@ async def handle_msg(context):
             await xhup_club_ws.send(json.dumps(xhup_msg))
         except websockets.ConnectionClosed as e:
             logger.info(e)
-            logger.info("连接断开，三秒后自动重连")
+            logger.info("后端连接断开，三秒后自动重连")
             await asyncio.sleep(3)
             xhup_club_ws = await get_xhup_club_ws()
     else:
-        logger.info("后端 websocket 尚未连接，现在尝试连接。")
+        logger.info("后端尚未连接，现在尝试连接。")
         xhup_club_ws = await get_xhup_club_ws()
 
 

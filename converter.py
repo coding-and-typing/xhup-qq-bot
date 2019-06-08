@@ -53,10 +53,11 @@ def cq_2_xhup(info):
                 "user": {
                     "id": info.get('user_id'),  # 用户 id，QQ 号等
                     "nickname": info['sender'].get('nickname'),
-                    "role": info['sender'].get('role'),  # 群组 owner/admin/other，非群组消息时，它为 None
+                    "role": info['sender'].get('role'),  # 群组 owner/admin/member，非群组消息时，它为 None
                 },
                 "group": {
                     "id": info['group_id'],  # 群 id
+                    "name": info['group_id'],  # 没有提供群名称，直接用 group_id 了。
                     "at_me": is_at_me(info['message'], info['self_id']),  # 是否是 at 我
                 } if info['message_type'] == "group" else None,
 
