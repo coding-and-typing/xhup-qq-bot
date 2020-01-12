@@ -15,7 +15,8 @@ from converter import cq_2_xhup, xhup_2_cq
 logging.basicConfig(level=BotConfig.LOG_LEVEL)
 
 """
-启动命令：`hypercorn run:app`
+xhup-qq-bot 的入口
+测试启动：python run.py
 """
 
 logger = logging.getLogger("xhup-qq-bot")
@@ -38,11 +39,11 @@ async def get_xhup_club_ws():
                                      })
         try:
             xhup_club_ws = await connect
-            logger.debug("后端连接成功")
+            logger.info("后端连接成功")
             return xhup_club_ws
         except OSError as e:
-            logger.info(e)
-            logger.info("后端连接失败，三秒后重连")
+            logger.warning(e)
+            logger.warning("后端连接失败，三秒后重连")
             await asyncio.sleep(3)
 
 
@@ -57,11 +58,11 @@ async def handle_xhup_club_event():
                 reply = json.loads(await xhup_club_ws.recv())
                 if reply:
                     cq_reply = xhup_2_cq(reply)
-                    logger.debug(f"机器人回复消息：{cq_reply}")
+                    logger.info(f"机器人回复消息：{cq_reply}")
                     await bot.send_msg(**cq_reply)
             except websockets.ConnectionClosed as e:
-                logger.info(e)
-                logger.info("后端连接断开，三秒后自动重连")
+                logger.warning(e)
+                logger.warning("后端连接断开，三秒后自动重连")
                 await asyncio.sleep(3)
                 xhup_club_ws = await get_xhup_club_ws()
             except Exception as e:
@@ -76,7 +77,7 @@ async def handle_msg(context):
     """
     在收到 CoolQ 消息时，将消息处理后，转发给 xhup
     """
-    logger.debug(f"收到消息：{context}")
+    logger.info(f"收到消息：{context}")
 
     global xhup_club_ws
     if xhup_club_ws:
@@ -84,8 +85,8 @@ async def handle_msg(context):
             xhup_msg = cq_2_xhup(context)
             await xhup_club_ws.send(json.dumps(xhup_msg))
         except websockets.ConnectionClosed as e:
-            logger.info(e)
-            logger.info("后端连接断开，三秒后自动重连")
+            logger.warning(e)
+            logger.warning("后端连接断开，三秒后自动重连")
             await asyncio.sleep(3)
             xhup_club_ws = await get_xhup_club_ws()
     else:

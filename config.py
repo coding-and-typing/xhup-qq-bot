@@ -6,19 +6,12 @@ import string
 
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 from datetime import timedelta
 from typing import Dict, Any
 
 """
 加载配置
 """
-
-# 1. 从 .env 加载配置
-
-env_path = Path('.') / '.env'
-load_dotenv(dotenv_path=env_path)
 
 
 class BotConfig(object):
@@ -27,12 +20,12 @@ class BotConfig(object):
     """
 
     # 1. 来自 .env
-    DEBUG = True if os.getenv("DEBUG") == 'True' else False
+    DEBUG = os.getenv("DEBUG") == 'True'
     LOG_LEVEL = logging.DEBUG if DEBUG else logging.INFO
 
     ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
-    HOST = os.getenv("HOST")
-    PORT = os.getenv("PORT")
+    HOST = os.getenv("HOST", "xhup-qq-bot")  # 容器间通过 dns 互访
+    PORT = int(os.getenv("PORT", 8080))
 
     NICKNAME = "拆小鹤"
 

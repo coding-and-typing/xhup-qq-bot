@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  cqhttp-coolq:
+    image: richardchien/cqhttp:latest
+    env_file: prod.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2M"
+        max-file: "10"
+    ports:
+      - "9000:9000"  # VNC 端口
+    volumes: 
+    - ./coolq:/home/user/coolq
+    volumes: ~  # 数据都在数据库里边
+    restart: always
+  xhup-qq-bot:
+    image: ryan4yin/xhup-qq-bot:latest
+    env_file: prod.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2M"
+        max-file: "10"
+    volumes: ~  # 数据都在数据库里边
+    restart: always
